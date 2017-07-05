@@ -1,4 +1,4 @@
 # react-redux-truffle-app
 
-npm i
-npm run wds
+`npm i`
+`npm run wds`
