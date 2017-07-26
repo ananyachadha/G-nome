@@ -11,6 +11,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import contract from 'truffle-contract'
 import MetaCoin from '../../build/contracts/MetaCoin.json'
+import { setBalance } from '../actions/userAction'
 import { AppDrawer } from './index'
 import { balance } from '../App.js'
 import { web3 } from '../web3.js'
@@ -21,18 +22,16 @@ class ToolbarComponent extends Component {
     super(props);
     this.state = {
       value: 3,
-      web3: web3,
-      balance: 0
+      web3: web3
     };
   }
 
   componentDidMount() {
-
   }
 
   handleChange = (event, index, value) => this.setState({value});
 
-  render() {
+  getBalance() {
     let metacoin = contract(MetaCoin)
     metacoin.setProvider(this.state.web3.currentProvider)
     let metacoinInstance
@@ -41,9 +40,13 @@ class ToolbarComponent extends Component {
         metacoinInstance = instance
         return metacoinInstance.getBalance.call("0x0Aa6b15E6dC54155f79BBb536D8C0c9195F1F27D")
       }).then((result) => {
-        this.setState({balance: result.c[0]});
+        this.props.dispatch(setBalance(this.props.main.addr, result.c[0]))
       })
     })
+  }
+
+  render() {
+    this.getBalance()
     return (
       <Toolbar>
         <ToolbarGroup>
@@ -53,7 +56,7 @@ class ToolbarComponent extends Component {
           <DropDownMenu value={this.state.value} onChange={this.handleChange}>
             <MenuItem value={1} primaryText="All Broadcasts" />
             <MenuItem value={2} primaryText="All Voice" />
-            <MenuItem value={3} primaryText={this.state.web3.eth.accounts[0]} />
+            <MenuItem value={3} primaryText={this.props.main.addr} />
             <MenuItem value={4} primaryText="Complete Voice" />
             <MenuItem value={5} primaryText="Complete Text" />
             <MenuItem value={6} primaryText="Active Voice" />
@@ -61,7 +64,7 @@ class ToolbarComponent extends Component {
           </DropDownMenu>
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle text={`Balance: ${this.state.balance}`} />
+          <ToolbarTitle text={`Balance: ${this.props.main.balance}`} />
           <FontIcon className="muidocs-icon-custom-sort" />
           <ToolbarSeparator />
           <RaisedButton label="Create Broadcast" primary={true} />

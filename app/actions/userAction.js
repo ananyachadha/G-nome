@@ -1,9 +1,18 @@
-export function setUser(key, name) {
+export function setUser(addr) {
   return {
     type: "SET_USER",
     payload: {
-      id: key,
-      name: name
+      addr: addr
+    }
+  }
+}
+
+export function setBalance(addr, balance) {
+  return {
+    type: "SET_BALANCE",
+    payload: {
+      addr: addr,
+      balance: balance
     }
   }
 }

@@ -19,24 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(setUser('111111', 'Testing dispatch'))
-  }
-
-  getWeb3() {
-    let web3 = window.web3
-
-    if (typeof web3 !== 'undefined') {
-      web3 = new Web3(web3.currentProvider)
-      console.log('Injected web3 detected.');
-      this.state.web3 = web3
-      exports.web3 = web3
-    } else {
-      var provider = new Web3.providers.HttpProvider('http://localhost:8545')
-      web3 = new Web3(provider)
-      console.log('No web3 instance injected, using Local web3.');
-      this.state.web3 = web3
-      exports.web3 = web3
-    }
+    this.props.dispatch(setUser(this.state.web3.eth.accounts[0]))
   }
 
   render() {
