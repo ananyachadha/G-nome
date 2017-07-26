@@ -18,7 +18,7 @@ class AppDrawerComponent extends Component {
     return (
       <div>
         <RaisedButton
-          label="Open Drawer"
+          label="&#9776;"
           onTouchTap={this.handleToggle}
         />
         <Drawer
