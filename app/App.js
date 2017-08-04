@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setUser } from './actions/userAction'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { AppDrawer, Toolbar } from './components/index'
+import { setUser } from './actions/userAction'
 import { web3 } from './web3.js'
-import BN from 'bn.js';
-import contract from 'truffle-contract'
-import MetaCoin from '../build/contracts/MetaCoin.json'
 
 injectTapEventPlugin();
 

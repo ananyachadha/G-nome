@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import contract from 'truffle-contract'
-import MetaCoin from '../../build/contracts/MetaCoin.json'
+import HumanStandardToken from '../../build/contracts/HumanStandardToken.json'
 import { setBalance } from '../actions/userAction'
 import { AppDrawer } from './index'
 import { balance } from '../App.js'
@@ -32,13 +32,13 @@ class ToolbarComponent extends Component {
   handleChange = (event, index, value) => this.setState({value});
 
   getBalance() {
-    let metacoin = contract(MetaCoin)
-    metacoin.setProvider(this.state.web3.currentProvider)
-    let metacoinInstance
+    let hst = contract(HumanStandardToken)
+    hst.setProvider(this.state.web3.currentProvider)
+    let hstInstance
     this.state.web3.eth.getAccounts((error, accounts) => {
-      metacoin.deployed().then((instance) => {
-        metacoinInstance = instance
-        return metacoinInstance.getBalance.call("0x0Aa6b15E6dC54155f79BBb536D8C0c9195F1F27D")
+      hst.deployed().then((instance) => {
+        hstInstance = instance
+        return hstInstance.balanceOf.call("0x0Aa6b15E6dC54155f79BBb536D8C0c9195F1F27D")
       }).then((result) => {
         this.props.dispatch(setBalance(this.props.main.addr, result.c[0]))
       })
