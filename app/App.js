@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { AppDrawer, Toolbar } from './components/index'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
+import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Charts, Analytics, Settings} from './components/index'
 import { setUser } from './actions/userAction'
 import { web3 } from './web3.js'
 
@@ -22,7 +29,13 @@ class App extends Component {
   render() {
       return (
         <div>
-          <Toolbar />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/Login' component={Login} />
+          <Route exact path='/Dashboard' component={Home} />
+          <Route exact path='/Status' component={Status} />
+          <Route exact path='/Charts' component={Charts} />
+          <Route exact path='/Analytics' component={Analytics} />
+          <Route exact path='/Settings' component={Settings} />
         </div>
       )
   }

@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -8,11 +15,11 @@ import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import SocialPerson from 'material-ui/svg-icons/social/person';
 import contract from 'truffle-contract'
 import HumanStandardToken from '../../build/contracts/HumanStandardToken.json'
 import { setBalance } from '../actions/userAction'
-import { AppDrawer } from './index'
+import { AppDrawer , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Charts, Analytics, Settings  } from './index'
 import { balance } from '../App.js'
 import { web3 } from '../web3.js'
 
@@ -50,26 +57,12 @@ class ToolbarComponent extends Component {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <AppDrawer />
-        </ToolbarGroup>
-        <ToolbarGroup firstChild={true}>
-          <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-            <MenuItem value={1} primaryText="All Broadcasts" />
-            <MenuItem value={2} primaryText="All Voice" />
-            <MenuItem value={3} primaryText={this.props.main.addr} />
-            <MenuItem value={4} primaryText="Complete Voice" />
-            <MenuItem value={5} primaryText="Complete Text" />
-            <MenuItem value={6} primaryText="Active Voice" />
-            <MenuItem value={7} primaryText="Active Text" />
-          </DropDownMenu>
+          <ToolbarTitle text={`Admin Console`} />
         </ToolbarGroup>
         <ToolbarGroup>
           <ToolbarTitle text={`Balance: ${this.props.main.balance}`} />
-          <FontIcon className="muidocs-icon-custom-sort" />
-          <ToolbarSeparator />
-          <RaisedButton label="Create Broadcast" primary={true} />
           <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+            iconButtonElement={<IconButton><SocialPerson /></IconButton>}
             anchorOrigin={{horizontal: 'left', vertical: 'top'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
@@ -77,7 +70,7 @@ class ToolbarComponent extends Component {
             <MenuItem primaryText="Send feedback" />
             <MenuItem primaryText="Settings" />
             <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" />
+            <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} />
           </IconMenu>
         </ToolbarGroup>
       </Toolbar>

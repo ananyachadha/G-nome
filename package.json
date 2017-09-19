@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node server",
     "wds": "node_modules/.bin/webpack-dev-server --content-base ./build --hot --inline"
   },
   "author": "https://github.com/kevinzhangTO",
@@ -36,6 +35,8 @@
   "dependencies": {
     "bn.js": "^4.11.7",
     "material-ui": "^0.18.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "webpack-dev-server": "^2.4.5"
   }
