@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Home, Status, Charts, Analytics, Settings } from './index'
+import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Home, Status, Charts, Analytics, Settings, UPort } from './index'
 
 
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: true,
     };
   }
 
@@ -20,7 +20,7 @@ class LoginComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions);
+      window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
@@ -29,8 +29,8 @@ class LoginComponent extends Component {
 
   render() {
     return (
-      <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`}}>
-        <Toolbar />
+      <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`, backgroundColor:`#00b2a9`}}>
+        <UPort />
       </div>
     )
   }

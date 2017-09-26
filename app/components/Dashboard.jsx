@@ -21,7 +21,7 @@ class DashboardComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions);
+      window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {

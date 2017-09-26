@@ -9,6 +9,8 @@ import Status from './Status.jsx'
 import Charts from './Charts.jsx'
 import Analytics from './Analytics.jsx'
 import Settings from './Settings.jsx'
+import Chart from './Chart.jsx'
+import UPort from './UPort.jsx'
 
 export {
   AppDrawer,
@@ -21,5 +23,7 @@ export {
   Status,
   Charts,
   Analytics,
-  Settings
+  Settings,
+  Chart,
+  UPort
 }

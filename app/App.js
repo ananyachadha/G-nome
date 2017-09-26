@@ -29,7 +29,7 @@ class App extends Component {
   render() {
       return (
         <div>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Login} />
           <Route exact path='/Login' component={Login} />
           <Route exact path='/Dashboard' component={Home} />
           <Route exact path='/Status' component={Status} />

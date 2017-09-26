@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import {GridList, GridTile} from 'material-ui/GridList';
+import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { connect } from 'react-redux'
+import { Connect } from 'uport-connect'
+import { uport } from '../uport.js'
 
 class GridListWidgetComponent extends Component {
   constructor(props) {
@@ -27,6 +30,16 @@ class GridListWidgetComponent extends Component {
       }
     };
 
+  }
+
+  componentDidMount() {
+  }
+
+  uportAttest() {
+    uport.attestCredentials({
+      sub: this.props.main.uport.address,
+      claim: { "Email": "kevin.zhang@consensys.net" }
+    })
   }
 
   render() {
@@ -68,6 +81,7 @@ class GridListWidgetComponent extends Component {
             <img src={"https://consensys.net/img/logo.svg"} />
           </GridTile>
         </GridList>
+        <FlatButton label="Attest" onClick={this.uportAttest.bind(this)} />
       </div>
     )
   }

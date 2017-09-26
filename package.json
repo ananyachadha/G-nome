@@ -33,11 +33,27 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "dependencies": {
+    "@vx/curve": "0.0.136",
+    "@vx/event": "0.0.136",
+    "@vx/glyph": "0.0.136",
+    "@vx/gradient": "0.0.136",
+    "@vx/grid": "0.0.139",
+    "@vx/group": "0.0.136",
+    "@vx/mock-data": "0.0.136",
+    "@vx/scale": "0.0.136",
+    "@vx/shape": "0.0.139",
+    "@vx/tooltip": "0.0.137",
     "bn.js": "^4.11.7",
+    "d3-array": "^1.2.0",
+    "d3-time-format": "^2.0.5",
+    "kjua": "^0.1.2",
     "material-ui": "^0.18.6",
+    "mnid": "^0.1.1",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
+    "uport": "^0.5.2",
+    "uport-connect": "^0.6.6",
     "webpack-dev-server": "^2.4.5"
   }
 }

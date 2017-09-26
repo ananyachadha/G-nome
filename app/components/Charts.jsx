@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Analytics, Settings } from './index'
+import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Analytics, Settings, Chart} from './index'
 
 
 class ChartsComponent extends Component {
@@ -20,7 +20,7 @@ class ChartsComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions);
+      window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
@@ -32,6 +32,7 @@ class ChartsComponent extends Component {
       <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`}}>
         <Toolbar />
         <AppDrawer />
+        <Chart />
       </div>
     )
   }

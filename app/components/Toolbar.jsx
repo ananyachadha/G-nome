@@ -60,14 +60,14 @@ class ToolbarComponent extends Component {
           <ToolbarTitle text={`Admin Console`} />
         </ToolbarGroup>
         <ToolbarGroup>
-          <ToolbarTitle text={`Balance: ${this.props.main.balance}`} />
+          <ToolbarTitle text={`Name: ${this.props.main.name}`} />
           <IconMenu
             iconButtonElement={<IconButton><SocialPerson /></IconButton>}
             anchorOrigin={{horizontal: 'left', vertical: 'top'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Send feedback" />
+            <MenuItem primaryText={`Name: ${this.props.main.name}`} />
+            <MenuItem primaryText={`Address: ${this.props.main.uport.address}`} />
             <MenuItem primaryText="Settings" />
             <MenuItem primaryText="Help" />
             <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} />
