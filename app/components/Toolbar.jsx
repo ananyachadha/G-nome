@@ -29,7 +29,10 @@ class ToolbarComponent extends Component {
     super(props);
     this.state = {
       value: 3,
-      web3: web3
+      web3: web3,
+      style: {
+        backgroundColor: '#00b2a9'
+      }
     };
   }
 
@@ -54,27 +57,36 @@ class ToolbarComponent extends Component {
 
   render() {
     this.getBalance()
-    return (
-      <Toolbar>
-        <ToolbarGroup>
-          <ToolbarTitle text={`Admin Console`} />
-        </ToolbarGroup>
-        <ToolbarGroup>
-          <ToolbarTitle text={`Name: ${this.props.main.name}`} />
-          <IconMenu
-            iconButtonElement={<IconButton><SocialPerson /></IconButton>}
-            anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          >
-            <MenuItem primaryText={`Name: ${this.props.main.name}`} />
-            <MenuItem primaryText={`Address: ${this.props.main.uport.address}`} />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Help" />
-            <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} />
-          </IconMenu>
-        </ToolbarGroup>
-      </Toolbar>
-    );
+    if (this.props.main.name) {
+      return (
+        <Toolbar style={this.state.style}>
+          <ToolbarGroup>
+            <ToolbarTitle text={`Admin Console`} />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle text={`${this.props.main.name}`} />
+            <IconMenu
+              iconButtonElement={<IconButton><SocialPerson /></IconButton>}
+              anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+            >
+              <MenuItem primaryText={`Name: ${this.props.main.name}`} />
+              <MenuItem primaryText={`Address: ${this.props.main.uport.address}`} />
+              <MenuItem primaryText="Settings" containerElement={<Link to="/Settings" />}/>
+              <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} />
+            </IconMenu>
+          </ToolbarGroup>
+        </Toolbar>
+      )
+    } else {
+      return (
+        <Toolbar style={this.state.style}>
+          <ToolbarGroup>
+            <ToolbarTitle text={`Admin Console`} />
+          </ToolbarGroup>
+        </Toolbar>
+      )
+    }
   }
 }
 

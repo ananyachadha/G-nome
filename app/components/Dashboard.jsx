@@ -40,7 +40,7 @@ class DashboardComponent extends Component {
 
   render() {
     return (
-      <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`, paddingLeft:256}}>
+      <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256}}>
         <GridListWidget />
         <SimpleTable />
       </div>

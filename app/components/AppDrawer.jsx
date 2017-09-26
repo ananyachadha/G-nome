@@ -27,7 +27,7 @@ class AppDrawerComponent extends Component {
     super(props);
     this.state = {
       open: true,
-      dataSource: []
+      dataSource: [],
     };
   }
 
@@ -44,7 +44,7 @@ class AppDrawerComponent extends Component {
   render() {
     return (
       <div>
-        <Drawer containerStyle={{top:56}}>
+        <Drawer containerStyle={{top:56, backgroundColor: '#d9d9db', boxShadow: 'none', zIndex:99, position:'absolute'}}>
           <MenuItem>
             <ActionSearch style={{position:'relative', top:7, color:'grey'}}/>
             <AutoComplete

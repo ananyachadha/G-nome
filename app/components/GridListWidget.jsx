@@ -32,7 +32,20 @@ class GridListWidgetComponent extends Component {
 
   }
 
+  updateDimensions() {
+      this.setState({width: window.innerWidth-256, height: window.innerHeight});
+  }
+
+  componentWillMount() {
+      this.updateDimensions();
+  }
+
   componentDidMount() {
+      window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.updateDimensions);
   }
 
   uportAttest() {
