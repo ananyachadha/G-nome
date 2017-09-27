@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Charts, Analytics, Settings} from './components/index'
 import { setUser } from './actions/userAction'
+import { updateLog } from './actions/logAction'
 import { web3 } from './web3.js'
 
 injectTapEventPlugin();
@@ -24,6 +25,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(setUser(this.state.web3.eth.accounts[0]))
+    this.props.dispatch(updateLog(JSON.parse(localStorage.getItem('ipfsLog'))))
   }
 
   render() {
@@ -43,7 +45,8 @@ class App extends Component {
 
 const mapStoreToProps = (store) => {
   return {
-    main: store.main
+    main: store.main,
+    ipfs: store.ipfs
   }
 }
 

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import {GridList, GridTile} from 'material-ui/GridList';
-import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { connect } from 'react-redux'
 import { Connect } from 'uport-connect'
 import { uport } from '../uport.js'
+import { updateLog } from '../actions/logAction'
+import Dropzone from 'react-dropzone'
+const ipfsAPI = require('ipfs-api');
+const ipfs = ipfsAPI('ipfs.infura.io', '5001', {protocol: 'https'})
 
 class GridListWidgetComponent extends Component {
   constructor(props) {
@@ -16,7 +19,9 @@ class GridListWidgetComponent extends Component {
       styles: {
         root: {
           display: 'flex',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
         gridList: {
           display: 'flex',
@@ -45,56 +50,37 @@ class GridListWidgetComponent extends Component {
   }
 
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
+      window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
-  uportAttest() {
-    uport.attestCredentials({
-      sub: this.props.main.uport.address,
-      claim: { "Email": "kevin.zhang@consensys.net" }
-    })
+  updateLog(storageObj) {
+    localStorage.setItem('ipfsLog', JSON.stringify(storageObj))
+    this.props.dispatch(updateLog(storageObj))
+  }
+
+  onDrop(files) {
+    let self = this
+    const reader = new FileReader()
+    reader.onload = function () {
+      const bufferedArray = new Buffer(reader.result)
+      ipfs.add(bufferedArray)
+      .then((resp) => {
+        let storageObj = (self.props.ipfs.log) ? self.props.ipfs.log : {}
+        storageObj[files[0].name] = resp[0].hash
+        self.updateLog(storageObj)
+      })
+    }
+    reader.readAsArrayBuffer(files[0])
   }
 
   render() {
+    const uploadImg = '../assets/upload.png'
     return (
       <div style={this.state.styles.root}>
-        <GridList style={this.state.styles.gridList} cols={1.1}>
-          <GridTile
-            key={"adsfasf"}
-            titleStyle={this.state.styles.titleStyle}
-            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          >
-            <img src={"https://consensys.net/img/logo.svg"} />
-          </GridTile>
-        </GridList>
-        <GridList style={this.state.styles.gridList} cols={1.1}>
-          <GridTile
-            key={"adsfasf"}
-            titleStyle={this.state.styles.titleStyle}
-            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          >
-            <img src={"https://consensys.net/img/logo.svg"} />
-          </GridTile>
-        </GridList>
-        <GridList style={this.state.styles.gridList} cols={1.1}>
-          <GridTile
-            key={"adsfasf"}
-            titleStyle={this.state.styles.titleStyle}
-            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          >
-            <img src={"https://consensys.net/img/logo.svg"} />
-          </GridTile>
-        </GridList>
-        <GridList style={this.state.styles.gridList} cols={1.1}>
-          <GridTile
-            key={"adsfasf"}
-            titleStyle={this.state.styles.titleStyle}
-            titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-          >
-            <img src={"https://consensys.net/img/logo.svg"} />
-          </GridTile>
-        </GridList>
-        <FlatButton label="Attest" onClick={this.uportAttest.bind(this)} />
+        <Dropzone onDrop={this.onDrop.bind(this)}>
+          <img src={"https://image.flaticon.com/icons/png/512/12/12313.png"} width='150px' height='150px' style={{paddingLeft:'25px'}}/>
+          <p style={{textAlign:'center'}}>Upload to IPFS</p>
+        </Dropzone>
       </div>
     )
   }
@@ -102,7 +88,8 @@ class GridListWidgetComponent extends Component {
 
 const mapStoreToProps = (store) => {
   return {
-    main: store.main
+    main: store.main,
+    ipfs: store.ipfs
   }
 }
 

@@ -25,5 +25,5 @@ export {
   Analytics,
   Settings,
   Chart,
-  UPort
+  UPort,
 }

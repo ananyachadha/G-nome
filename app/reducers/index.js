@@ -39,4 +39,17 @@ module.exports = {
         return state
     }
   },
+  ipfs: (state={
+    log: {},
+  }, action) => {
+    switch (action.type) {
+      case 'UPDATE_LOG':
+        return {
+          ...state,
+          log: action.payload.log
+        }
+      default:
+        return state
+    }
+  },
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Charts, Analytics } from './index'
-
+import FlatButton from 'material-ui/FlatButton';
+import { Connect } from 'uport-connect'
+import { uport } from '../uport.js'
 
 class SettingsComponent extends Component {
   constructor(props) {
@@ -27,11 +29,21 @@ class SettingsComponent extends Component {
       window.removeEventListener("resize", this.updateDimensions);
   }
 
+  uportAttest() {
+    uport.attestCredentials({
+      sub: this.props.main.uport.address,
+      claim: { "Email": "kevin.zhang@consensys.net" }
+    })
+  }
+
   render() {
     return (
-      <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`}}>
+      <div>
         <Toolbar />
         <AppDrawer />
+        <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256}}>
+          <FlatButton label="Attest" onClick={this.uportAttest.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
+        </div>
       </div>
     )
   }

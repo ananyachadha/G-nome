@@ -31,7 +31,10 @@ class ToolbarComponent extends Component {
       value: 3,
       web3: web3,
       style: {
-        backgroundColor: '#00b2a9'
+        backgroundColor: '#00b2a9',
+        menuItem: {
+          textAlign: 'right'
+        }
       }
     };
   }
@@ -64,16 +67,16 @@ class ToolbarComponent extends Component {
             <ToolbarTitle text={`Admin Console`} />
           </ToolbarGroup>
           <ToolbarGroup>
-            <ToolbarTitle text={`${this.props.main.name}`} />
+            <ToolbarTitle text={`${this.props.main.uport.address}`} />
             <IconMenu
               iconButtonElement={<IconButton><SocialPerson /></IconButton>}
               anchorOrigin={{horizontal: 'left', vertical: 'top'}}
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
             >
-              <MenuItem primaryText={`Name: ${this.props.main.name}`} />
-              <MenuItem primaryText={`Address: ${this.props.main.uport.address}`} />
-              <MenuItem primaryText="Settings" containerElement={<Link to="/Settings" />}/>
-              <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} />
+              <MenuItem primaryText={`Name: ${this.props.main.name}`} style={this.state.style.menuItem}/>
+              <MenuItem primaryText={`Network: ${this.props.main.uport.network.charAt(0).toUpperCase() + this.props.main.uport.network.slice(1)}`} style={this.state.style.menuItem} />
+              <MenuItem primaryText="Settings" containerElement={<Link to="/Settings" />} style={this.state.style.menuItem} />
+              <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} style={this.state.style.menuItem} />
             </IconMenu>
           </ToolbarGroup>
         </Toolbar>

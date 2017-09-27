@@ -7,6 +7,15 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import {
+  BrowserRouter as Router,
+  withRouter,
+  Redirect,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
+import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux'
 import { Toolbar } from './index'
 
@@ -19,44 +28,41 @@ class SimpleTableComponent extends Component {
     };
   }
 
+  openFile(e) {
+    let open_link = window.open('','_blank');
+    const ipfsFileHash = e.currentTarget.parentNode.parentNode.childNodes[1].innerHTML
+    const fileLink = `https://ipfs.io/ipfs/${ipfsFileHash}`
+
+    open_link.location=fileLink
+  }
 
   render() {
+    // let nameArray = Object.keys(this.props.ipfs.log)
+    // let logArray = nameArray.map((k) => this.props.ipfs.log[k])
+    let tableList
+    if(this.props.ipfs.log)  {
+      tableList = Object.keys(this.props.ipfs.log).map((k) => {
+        return (
+          <TableRow key={k}>
+            <TableHeaderColumn>{k}</TableHeaderColumn>
+            <TableRowColumn>{this.props.ipfs.log[k]}</TableRowColumn>
+            <TableRowColumn><FlatButton label="Open" onClick={this.openFile.bind(this)}/></TableRowColumn>
+          </TableRow>
+        )
+      })
+    }
     return (
       <div>
         <Table>
-          <TableHeader>
+          <TableHeader displaySelectAll={false}>
             <TableRow>
-              <TableHeaderColumn>ID</TableHeaderColumn>
               <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn>IPFS Hash</TableHeaderColumn>
               <TableHeaderColumn>Status</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableRowColumn>1</TableRowColumn>
-              <TableRowColumn>John Smith</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>2</TableRowColumn>
-              <TableRowColumn>Randal White</TableRowColumn>
-              <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>3</TableRowColumn>
-              <TableRowColumn>Stephanie Sanders</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>4</TableRowColumn>
-              <TableRowColumn>Steve Brown</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>5</TableRowColumn>
-              <TableRowColumn>Christopher Nolan</TableRowColumn>
-              <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
+          <TableBody displayRowCheckbox={false}>
+            { tableList }
           </TableBody>
         </Table>
       </div>
@@ -66,7 +72,8 @@ class SimpleTableComponent extends Component {
 
 const mapStoreToProps = (store) => {
   return {
-    main: store.main
+    main: store.main,
+    ipfs: store.ipfs
   }
 }
 
