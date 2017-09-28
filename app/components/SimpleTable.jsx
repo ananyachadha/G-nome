@@ -24,7 +24,13 @@ class SimpleTableComponent extends Component {
     super(props);
     this.state = {
       open: true,
-      dataSource: []
+      dataSource: [],
+      styles: {
+        openButton: {
+          backgroundColor: '#00b2a9',
+          color: '#FFFFFF'
+        }
+      }
     };
   }
 
@@ -46,7 +52,7 @@ class SimpleTableComponent extends Component {
           <TableRow key={k}>
             <TableHeaderColumn>{k}</TableHeaderColumn>
             <TableRowColumn>{this.props.ipfs.log[k]}</TableRowColumn>
-            <TableRowColumn><FlatButton label="Open" onClick={this.openFile.bind(this)}/></TableRowColumn>
+            <TableRowColumn style={{textAlign:'right'}}><FlatButton label="Open" onClick={this.openFile.bind(this)} style={this.state.styles.openButton}/></TableRowColumn>
           </TableRow>
         )
       })
@@ -58,7 +64,7 @@ class SimpleTableComponent extends Component {
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>IPFS Hash</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
+              <TableHeaderColumn></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>

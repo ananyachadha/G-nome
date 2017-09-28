@@ -32,7 +32,10 @@ class SettingsComponent extends Component {
   uportAttest() {
     uport.attestCredentials({
       sub: this.props.main.uport.address,
-      claim: { "Email": "kevin.zhang@consensys.net" }
+      claim: { "EULA": "I Agree" }
+    })
+    .then((resp) => {
+      console.log("resp", resp)
     })
   }
 

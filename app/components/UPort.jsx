@@ -11,6 +11,7 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
+import Paper from 'material-ui/Paper'
 import { setUport } from '../actions/userAction'
 import { store, history } from '../store'
 import { web3, uport } from '../uport.js'
@@ -30,9 +31,20 @@ class UPortComponent extends Component {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          marginTop: '100px',
+          marginBottom: '15px',
           fontFamily: 'Helvetica',
           color: '#FFFFFF',
           fontSize: '2em',
+        },
+        qr: {
+          boxShadow:'rgba(0, 0, 0, 0.19) 0px 10px 30px, rgba(0, 0, 0, 0.23) 0px 6px 10px',
+          top: '100px',
+          height: '350px',
+          width: '320px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }
       }
     };
@@ -77,11 +89,9 @@ class UPortComponent extends Component {
       // Nest QR in <a> and inject
       aTag.appendChild(qr)
       document.querySelector('#kqr').appendChild(aTag)
-
-      console.log(aTag)
     })
     .then((credentials) => {
-      console.log(credentials)
+      console.log("uport", credentials)
       this.props.dispatch(setUport(this.props.main.addr, credentials.name, credentials, this.state.uport))
       this.setState({authenticated: true})
     })
@@ -94,11 +104,11 @@ class UPortComponent extends Component {
     return (
       <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`}}>
         <Toolbar />
-        <div style={{paddingTop:'100px'}}>
-          <div id='kqr' style={this.state.style.center}>
-          </div>
-          <div style={this.state.style.center}>
-            Log in with uPort
+        <div style={this.state.style.center}>
+          Log in with uPort
+        </div>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <div id='kqr' style={this.state.style.qr}>
           </div>
         </div>
       </div>

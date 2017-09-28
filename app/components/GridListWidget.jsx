@@ -22,6 +22,7 @@ class GridListWidgetComponent extends Component {
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'center',
+          height: '250px'
         },
         gridList: {
           display: 'flex',
@@ -78,8 +79,8 @@ class GridListWidgetComponent extends Component {
     return (
       <div style={this.state.styles.root}>
         <Dropzone onDrop={this.onDrop.bind(this)}>
-          <img src={"https://image.flaticon.com/icons/png/512/12/12313.png"} width='150px' height='150px' style={{paddingLeft:'25px'}}/>
-          <p style={{textAlign:'center'}}>Upload to IPFS</p>
+          <img src={"https://image.flaticon.com/icons/png/512/12/12313.png"} width='150px' height='150px' style={{paddingLeft:'25px', cursor: 'pointer'}}/>
+          <p style={{textAlign:'center', fontFamily: 'Roboto, sans-serif'}}>Upload to IPFS</p>
         </Dropzone>
       </div>
     )
