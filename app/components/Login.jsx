@@ -19,14 +19,6 @@ class LoginComponent extends Component {
       this.updateDimensions();
   }
 
-  componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
-  }
-
   render() {
     return (
       <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`, backgroundColor:`#00b2a9`}}>

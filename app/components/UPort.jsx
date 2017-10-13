@@ -16,6 +16,7 @@ import { setUport } from '../actions/userAction'
 import { store, history } from '../store'
 import { web3, uport } from '../uport.js'
 import kjua from 'kjua'
+import * as mnid from 'mnid'
 
 class UPortComponent extends Component {
   constructor(props) {
@@ -45,27 +46,13 @@ class UPortComponent extends Component {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-        }
+        },
       }
     };
   }
 
-
-  updateDimensions() {
-      this.setState({width: window.innerWidth, height: window.innerHeight});
-  }
-
-  componentWillMount() {
-      this.updateDimensions();
-  }
-
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
       this.uportConnect();
-  }
-
-  componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
   }
 
   uportConnect() {
@@ -76,10 +63,12 @@ class UPortComponent extends Component {
     (uri) => {
 
       const qr = kjua({
+        render: 'canvas',
+        crisp: true,
         text: uri,
         fill: '#000000',
         size: 300,
-        back: '#ffffff'
+        back: '#ffffff',
       })
 
       // Create wrapping link for mobile touch
@@ -91,8 +80,8 @@ class UPortComponent extends Component {
       document.querySelector('#kqr').appendChild(aTag)
     })
     .then((credentials) => {
-      console.log("uport", credentials)
-      this.props.dispatch(setUport(this.props.main.addr, credentials.name, credentials, this.state.uport))
+      let addr = mnid.decode(credentials.address)
+      this.props.dispatch(setUport(addr.address, credentials.name, credentials, this.state.uport))
       this.setState({authenticated: true})
     })
   }
@@ -105,7 +94,7 @@ class UPortComponent extends Component {
       <div style={{height:`${this.state.height}px`, width:`${this.state.width}px`}}>
         <Toolbar />
         <div style={this.state.style.center}>
-          Log in with uPort
+          Log in with <img src="https://static1.squarespace.com/static/578f3f1d15d5db7814d05191/t/58061a796b8f5beaefc681ea/1476795025049/" width="270px" height="100px"/>
         </div>
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <div id='kqr' style={this.state.style.qr}>
@@ -123,4 +112,4 @@ const mapStoreToProps = (store) => {
 }
 
 const UPort = connect(mapStoreToProps)(UPortComponent)
-export default UPort
+export default withRouter(connect(mapStoreToProps)(UPort));

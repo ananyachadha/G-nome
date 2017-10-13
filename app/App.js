@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import {
   BrowserRouter as Router,
+  withRouter,
   Redirect,
   Route,
   Link,
@@ -11,7 +12,7 @@ import {
 import { AppDrawer, Toolbar , Dashboard, SimpleTable, GridListWidget, Login, Home, Status, Charts, Analytics, Settings} from './components/index'
 import { setUser } from './actions/userAction'
 import { updateLog } from './actions/logAction'
-import { web3 } from './web3.js'
+import { web3 } from './uport.js'
 
 injectTapEventPlugin();
 
@@ -24,7 +25,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(setUser(this.state.web3.eth.accounts[0]))
     this.props.dispatch(updateLog(JSON.parse(localStorage.getItem('ipfsLog'))))
   }
 
@@ -50,4 +50,4 @@ const mapStoreToProps = (store) => {
   }
 }
 
-export default connect(mapStoreToProps)(App)
+export default withRouter(connect(mapStoreToProps)(App));

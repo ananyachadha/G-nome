@@ -8,7 +8,9 @@ class DashboardComponent extends Component {
     super(props);
     this.state = {
       open: true,
-      dataSource: []
+      dataSource: [],
+      width: window.innerWidth,
+      height: window.innerHeight
     };
   }
 
@@ -21,26 +23,16 @@ class DashboardComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
+      window.addEventListener("resizeDB", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
-  }
-
-  handleUpdateInput(value) {
-    this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ]
-    });
+      window.removeEventListener("resizeDB", this.updateDimensions.bind(this));
   }
 
   render() {
     return (
-      <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256}}>
+      <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256, overflowY:'auto'}}>
         <GridListWidget />
         <SimpleTable />
       </div>

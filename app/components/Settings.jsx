@@ -22,11 +22,11 @@ class SettingsComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
+      window.addEventListener("resizeSettings", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
+      window.removeEventListener("resizeSettings", this.updateDimensions.bind(this));
   }
 
   uportAttest() {
@@ -39,6 +39,17 @@ class SettingsComponent extends Component {
     })
   }
 
+  uportSendEth() {
+    const txobject = {
+       from: '0x9530dCBEB129E3a3EaBFC6B55e442122301aEfbE',
+       to: '0x0Aa6b15E6dC54155f79BBb536D8C0c9195F1F27D',
+       value: 5
+     }
+     uport.sendTransaction(txobject).then(txID => {
+       console.log(txID)
+     })
+  }
+
   render() {
     return (
       <div>
@@ -46,6 +57,7 @@ class SettingsComponent extends Component {
         <AppDrawer />
         <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256}}>
           <FlatButton label="Attest" onClick={this.uportAttest.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
+          <FlatButton label="Attest" onClick={this.uportSendEth.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
         </div>
       </div>
     )

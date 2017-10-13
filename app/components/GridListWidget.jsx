@@ -7,6 +7,7 @@ import { Connect } from 'uport-connect'
 import { uport } from '../uport.js'
 import { updateLog } from '../actions/logAction'
 import Dropzone from 'react-dropzone'
+import CryptoJS from 'crypto-js'
 const ipfsAPI = require('ipfs-api');
 const ipfs = ipfsAPI('ipfs.infura.io', '5001', {protocol: 'https'})
 
@@ -35,7 +36,6 @@ class GridListWidgetComponent extends Component {
         },
       }
     };
-
   }
 
   updateDimensions() {
@@ -47,11 +47,11 @@ class GridListWidgetComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
+      window.addEventListener("resizeGLW", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions.bind(this));
+      window.removeEventListener("resizeGLW", this.updateDimensions.bind(this));
   }
 
   updateLog(storageObj) {
@@ -64,6 +64,7 @@ class GridListWidgetComponent extends Component {
     const reader = new FileReader()
     reader.onload = function () {
       const bufferedArray = new Buffer(reader.result)
+      localStorage.setItem("bufferedArray", bufferedArray)
       ipfs.add(bufferedArray)
       .then((resp) => {
         let storageObj = (self.props.ipfs.log) ? self.props.ipfs.log : {}
@@ -80,7 +81,7 @@ class GridListWidgetComponent extends Component {
       <div style={this.state.styles.root}>
         <Dropzone onDrop={this.onDrop.bind(this)}>
           <img src={"https://image.flaticon.com/icons/png/512/12/12313.png"} width='150px' height='150px' style={{paddingLeft:'25px', cursor: 'pointer'}}/>
-          <p style={{textAlign:'center', fontFamily: 'Roboto, sans-serif'}}>Upload to IPFS</p>
+          <p style={{marginTop:'auto', textAlign:'center', fontFamily: 'Roboto, sans-serif', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Upload to <img src={"https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/02/1456818734ipfs-logo.png"} width='80px' height='30px'/></p>
         </Dropzone>
       </div>
     )

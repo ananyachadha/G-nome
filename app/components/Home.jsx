@@ -20,11 +20,11 @@ class HomeComponent extends Component {
   }
 
   componentDidMount() {
-      window.addEventListener("resize", this.updateDimensions.bind(this));
+      window.addEventListener("resizeHome", this.updateDimensions.bind(this));
   }
 
   componentWillUnmount() {
-      window.removeEventListener("resize", this.updateDimensions);
+      window.removeEventListener("resizeHome", this.updateDimensions.bind(this));
   }
 
   render() {

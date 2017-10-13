@@ -43,8 +43,6 @@ class SimpleTableComponent extends Component {
   }
 
   render() {
-    // let nameArray = Object.keys(this.props.ipfs.log)
-    // let logArray = nameArray.map((k) => this.props.ipfs.log[k])
     let tableList
     if(this.props.ipfs.log)  {
       tableList = Object.keys(this.props.ipfs.log).map((k) => {
