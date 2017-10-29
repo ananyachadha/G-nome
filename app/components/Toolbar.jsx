@@ -58,7 +58,6 @@ class ToolbarComponent extends Component {
               targetOrigin={{horizontal: 'left', vertical: 'top'}}
             >
               <MenuItem primaryText={`Name: ${this.props.main.name}`} style={this.state.style.menuItem}/>
-              <MenuItem primaryText={`Network: ${this.props.main.uport.network.charAt(0).toUpperCase() + this.props.main.uport.network.slice(1)}`} style={this.state.style.menuItem} />
               <MenuItem primaryText="Settings" containerElement={<Link to="/Settings" />} style={this.state.style.menuItem} />
               <MenuItem primaryText="Sign out" containerElement={<Link to="/Login" />} style={this.state.style.menuItem} onClick={this.signOut.bind(this)}/>
             </IconMenu>
