@@ -56,8 +56,8 @@ class SettingsComponent extends Component {
         <Toolbar />
         <AppDrawer />
         <div style={{height:`${this.state.height}px`, width:`${this.state.width-256}px`, paddingLeft:256}}>
-          <FlatButton label="Attest" onClick={this.uportAttest.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
-          <FlatButton label="Attest" onClick={this.uportSendEth.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
+          <FlatButton label="Attest EULA" onClick={this.uportAttest.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
+          <FlatButton label="Send ETH" onClick={this.uportSendEth.bind(this)} style={{backgroundColor:'black', color:'red'}}/>
         </div>
       </div>
     )
