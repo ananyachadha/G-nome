@@ -13,7 +13,7 @@ contract Genome {
  address owner;
 
  function Genome() {
-    payout = 1000000000000000000;
+    payout = 10000000000000000000;
     owner = msg.sender;
  }
 
@@ -42,7 +42,7 @@ contract Genome {
      require(msg.sender == owner);
      payout = _newPayout;
  }
- 
+
  function getgenomeData(uint _start) constant returns (string) {
      return genomeData[_start].genome;
 

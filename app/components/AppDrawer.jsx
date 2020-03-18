@@ -44,24 +44,7 @@ class AppDrawerComponent extends Component {
   render() {
     return (
       <div>
-        <Drawer containerStyle={{top:56, backgroundColor: '#d9d9db', boxShadow: 'none', zIndex:99, position:'absolute'}}>
-          <MenuItem>
-            <ActionSearch style={{position:'relative', top:7, color:'grey'}}/>
-            <AutoComplete
-              hintText="Search"
-              dataSource={this.state.dataSource}
-              onUpdateInput={this.handleUpdateInput}
-              textFieldStyle={{width:185}}
-            />
-          </MenuItem>
-          <List>
-            <ListItem primaryText="Dashboard" leftIcon={<ActionDashboard />} containerElement={<Link to="/Dashboard" />} />
-            <ListItem primaryText="Status" leftIcon={<ActionSchedule />} containerElement={<Link to="/Status" />} />
-            <ListItem primaryText="Charts" leftIcon={<EditorChart />} containerElement={<Link to="/Charts" />} />
-            <ListItem primaryText="Analytics" leftIcon={<ActionTrendingUp />} containerElement={<Link to="/Analytics" />} />
-            <ListItem primaryText="Settings" leftIcon={<ActionSettings />} containerElement={<Link to="/Settings" />} />
-          </List>
-        </Drawer>
+          
       </div>
     )
   }
