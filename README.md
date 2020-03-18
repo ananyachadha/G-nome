@@ -1,7 +1,9 @@
-# How to start it
+# Run
 make sure npm + node are installed and on their latest versions. 
 Then:
+
 `npm i`
+
 `npm run wds`
 
 # G-nome-Code
