@@ -60,7 +60,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
-    "truffle": "^4.0.4",
+    "truffle": "^5.7.9",
     "truffle-hdwallet-provider": "0.0.3",
     "uport": "^0.5.2",
     "uport-connect": "^0.6.6",
